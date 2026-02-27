@@ -510,8 +510,10 @@
     </style>
 </head>
 <body>
-    <!-- Audio de cumpleaños -->
+    <!-- Audio de cumpleaños con violín -->
     <audio id="birthdaySong" loop>
+        <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3" type="audio/mpeg">
+        <!-- Fallback: URL alternativa de violín -->
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
         Tu navegador no soporta audio HTML5.
     </audio>
@@ -586,8 +588,13 @@
             // Iniciar música al primer clic (requerido por navegadores)
             if (!musicStarted) {
                 const audio = document.getElementById('birthdaySong');
-                audio.volume = 0.5; // Volumen al 50%
-                audio.play().catch(e => console.log('Audio autoplay blocked:', e));
+                audio.volume = 0.4; // Volumen al 40% para que no sea molesto
+                audio.play().catch(e => {
+                    console.log('Audio autoplay blocked:', e);
+                    // Intentar con el fallback si el primero falla
+                    audio.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+                    audio.play().catch(err => console.log('Fallback also blocked:', err));
+                });
                 musicStarted = true;
             }
             
