@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños Andreita</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #e0e7ff 0%, #d1d5ff 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Crimson Text', serif;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Fondo de nubes suaves */
+        .clouds {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 100px;
+            opacity: 0.6;
+        }
+        
+        .cloud::before {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 100px;
+        }
+        
+        .cloud:nth-child(1) { width: 100px; height: 40px; top: 20%; left: -100px; animation: float-cloud 20s infinite; }
+        .cloud:nth-child(2) { width: 80px; height: 35px; top: 40%; left: -80px; animation: float-cloud 25s infinite 5s; }
+        .cloud:nth-child(3) { width: 120px; height: 45px; top: 60%; left: -120px; animation: float-cloud 22s infinite 10s; }
+        
+        @keyframes float-cloud {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(100vw + 200px)); }
+        }
+        
+        /* Contenedor principal */
+        .scene {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 600px;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 50px;
+        }
+        
+        /* Instrucción */
+        .instruction {
+            margin-top: 20px;
+            color: #4a5568;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2em;
+            opacity: 0.8;
+            animation: bounce-text 2s infinite;
+            text-align: center;
+            position: absolute;
+            bottom: 10px;
+        }
+        
+        @keyframes bounce-text {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Sobre */
+        .envelope-container {
+            position: relative;
+            width: 320px;
+            height: 220px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin-bottom: 100px;
+        }
+        
+        .envelope-container:hover {
+            transform: scale(1.02);
+        }
+        
+        .envelope {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f5f5dc 0%, #e8e4c9 100%);
+            border-radius: 5px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            overflow: visible;
+        }
+        
+        /* Cuerpo del sobre */
+        .envelope-body {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 70%;
+            background: linear-gradient(to bottom, #e8e4c9 0%, #d4d0b8 100%);
+            clip-path: polygon(0 40%, 50% 0, 100% 40%, 100% 100%, 0 100%);
+            z-index: 10;
+        }
+        
+        /* Solapa del sobre */
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(to bottom, #f5f5dc 0%, #e8e4c9 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 66%, 50% 100%, 0 66%);
+            transform-origin: top;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 20;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+        }
+        
+        /* Broche azul */
+        .seal {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 55px;
+            height: 55px;
+            background: radial-gradient(circle at 30% 30%, #4a90e2, #1e3a8a);
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3), inset 0 2px 5px rgba(255,255,255,0.3);
+            z-index: 30;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            transition: all 0.4s;
+        }
+        
+        .seal::before {
+            content: '💙';
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+        }
+        
+        /* Carta dentro del sobre */
+        .letter {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%) scale(0.3);
+            width: 340px;
+            height: 480px;
+            background: #faf8f3;
+            background-image: 
+                repeating-linear-gradient(
+                    transparent,
+                    transparent 22px,
+                    #e5e5e5 22px,
+                    #e5e5e5 23px
+                );
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 15;
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            overflow: hidden;
+            border: 1px solid #e0ddd5;
+        }
+        
+        .letter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right, transparent 48%, rgba(139, 69, 19, 0.03) 50%, transparent 52%);
+            pointer-events: none;
+        }
+        
+        /* Doblez de la carta */
+        .letter-fold {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, transparent, rgba(0,0,0,0.08), transparent);
+            transform: translateY(-50%);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* Contenido de la carta */
+        .letter-content {
+            padding: 25px 22px;
+            height: 100%;
+            overflow-y: auto;
+            font-size: 0.85em;
+            line-height: 1.6;
+            color: #2d3748;
+            text-align: justify;
+        }
+        
+        .letter-content p {
+            margin-bottom: 8px;
+            text-indent: 15px;
+        }
+        
+        .letter-content .signature {
+            text-align: right;
+            margin-top: 15px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2em;
+            color: #1e3a8a;
+            text-indent: 0;
+            line-height: 1.4;
+        }
+        
+        .letter-content .names {
+            text-align: right;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4em;
+            color: #c53030;
+            margin-top: 8px;
+            text-indent: 0;
+            font-weight: bold;
+        }
+        
+        /* Animación de apertura */
+        .envelope-container.opened .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 5;
+        }
+        
+        .envelope-container.opened .seal {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0);
+        }
+        
+        .envelope-container.opened .letter {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-320px) scale(1);
+            z-index: 25;
+        }
+        
+        .envelope-container.opened {
+            pointer-events: none;
+        }
+        
+        /* Scrollbar personalizada para la carta */
+        .letter-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .letter-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+        
+        .letter-content::-webkit-scrollbar-thumb {
+            background: #c0c0c0;
+            border-radius: 3px;
+        }
+        
+        /* Botón de mensaje oculto */
+        .hidden-message-btn {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1em;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 100;
+            opacity: 0;
+        }
+        
+        .hidden-message-btn.show {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+            animation: pulse-btn 2s infinite;
+        }
+        
+        @keyframes pulse-btn {
+            0%, 100% { box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4); }
+            50% { box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6); }
+        }
+        
+        .hidden-message-btn:hover {
+            transform: translateX(-50%) scale(1.05);
+        }
+        
+        /* Modal del mensaje oculto */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+            padding: 20px;
+        }
+        
+        .modal-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+            width: 100%;
+            max-width: 500px;
+            max-height: 80vh;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            transform: scale(0.8) translateY(50px);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            border: 2px solid #feb2b2;
+            overflow-y: auto;
+        }
+        
+        .modal-overlay.show .modal-content {
+            transform: scale(1) translateY(0);
+        }
+        
+        .modal-content h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2em;
+            color: #c53030;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .modal-content p {
+            font-size: 1.05em;
+            line-height: 1.9;
+            color: #4a5568;
+            margin-bottom: 12px;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .modal-content .final-line {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.6em;
+            color: #c53030;
+            text-align: center;
+            margin-top: 25px;
+            font-weight: bold;
+            line-height: 1.3;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #718096;
+            transition: color 0.3s;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-modal:hover {
+            color: #c53030;
+            transform: scale(1.1);
+        }
+        
+        /* Globos */
+        .balloons-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            overflow: hidden;
+        }
+        
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 65px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            opacity: 0;
+            box-shadow: inset -5px -5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            width: 2px;
+            height: 40px;
+            background: rgba(0,0,0,0.2);
+            transform: translateX(-50%);
+        }
+        
+        .balloon.rising {
+            animation: rise 10s ease-in forwards;
+        }
+        
+        @keyframes rise {
+            0% { transform: translateY(100vh) rotate(-5deg); opacity: 0.9; }
+            100% { transform: translateY(-300px) rotate(5deg); opacity: 0; }
+        }
+        
+        /* Confeti */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 60;
+            overflow: hidden;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            opacity: 0;
+        }
+        
+        .confetti.falling {
+            animation: confetti-fall 5s ease-out forwards;
+        }
+        
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            .scene { height: 100vh; padding-bottom: 80px; }
+            .envelope-container { 
+                width: 280px; 
+                height: 190px; 
+                margin-bottom: 80px;
+            }
+            .letter { 
+                width: 300px; 
+                height: 420px; 
+            }
+            .letter-content { 
+                font-size: 0.8em; 
+                padding: 20px 18px;
+                line-height: 1.5;
+            }
+            .envelope-container.opened .letter { 
+                transform: translateX(-50%) translateY(-280px) scale(1); 
+            }
+            .instruction { font-size: 1em; bottom: 20px; }
+            .modal-content { padding: 25px; }
+            .modal-content h3 { font-size: 1.6em; }
+            .modal-content p { font-size: 0.95em; }
+        }
+        
+        @media (max-width: 360px) {
+            .letter { width: 280px; height: 400px; }
+            .letter-content { font-size: 0.75em; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Audio de cumpleaños -->
+    <audio id="birthdaySong" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Tu navegador no soporta audio HTML5.
+    </audio>
+    
+    <!-- Nubes de fondo -->
+    <div class="clouds">
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+    </div>
+    
+    <!-- Globos -->
+    <div class="balloons-container" id="balloons"></div>
+    
+    <!-- Confeti -->
+    <div class="confetti-container" id="confetti"></div>
+    
+    <!-- Escena principal -->
+    <div class="scene">
+        <div class="envelope-container" id="envelope" onclick="openEnvelope()">
+            <div class="envelope">
+                <div class="envelope-flap"></div>
+                <div class="envelope-body"></div>
+                <div class="seal"></div>
+                <div class="letter">
+                    <div class="letter-fold"></div>
+                    <div class="letter-content">
+                        <p>Hoy quiero aprovechar este día tan especial para desearte un año lleno de alegrías, sueños cumplidos y momentos que te hagan sonreír.</p>
+                        
+                        <p>Que este nuevo año de vida te acerque a todo lo que anhelas y te rodee de personas que valoren lo increíble que eres.</p>
+                        
+                        <p>Tal vez aún no hemos tenido la oportunidad de conocernos realmente, pero eso no impide que hoy quiera desearte lo mejor. Aunque la distancia exista, hay personas que merecen un detalle especial… y tú eres una de ellas.</p>
+                        
+                        <p>Que la vida te trate bonito. Hoy, y siempre.</p>
+                        
+                        <p class="names">¡Feliz cumpleaños Andreita! ❤️</p>
+                        <p class="signature">Con cariño,<br>Ernesto</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <p class="instruction" id="instruction">✉️ Toca el sobre ✉️</p>
+    </div>
+    
+    <!-- Botón de mensaje oculto -->
+    <button class="hidden-message-btn" id="hiddenBtn" onclick="showHiddenMessage()">
+        🔒 Presiona aquí
+    </button>
+    
+    <!-- Modal del mensaje oculto -->
+    <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-modal" onclick="closeModal()">✕</button>
+            <h3>💌 Para tus ojos solamente</h3>
+            <p>No sé si debería decir esto aquí…</p>
+            <p>pero me gustaría verte sonreír en persona algún día. Y comprobar si esa sensación que tengo cuando te escribo también existe cuando estamos frente a frente.</p>
+            <p>Hay cosas que prefiero decir en persona.</p>
+            <p>Esto es solo un adelanto.</p>
+            <p class="final-line">Continuará… si tú quieres. 💫</p>
+        </div>
+    </div>
+
+    <script>
+        let opened = false;
+        let musicStarted = false;
+        
+        function openEnvelope() {
+            if (opened) return;
+            opened = true;
+            
+            // Iniciar música al primer clic (requerido por navegadores)
+            if (!musicStarted) {
+                const audio = document.getElementById('birthdaySong');
+                audio.volume = 0.5; // Volumen al 50%
+                audio.play().catch(e => console.log('Audio autoplay blocked:', e));
+                musicStarted = true;
+            }
+            
+            const envelope = document.getElementById('envelope');
+            const instruction = document.getElementById('instruction');
+            const hiddenBtn = document.getElementById('hiddenBtn');
+            
+            // Animación de apertura
+            envelope.classList.add('opened');
+            instruction.style.opacity = '0';
+            
+            // Efectos
+            setTimeout(() => {
+                createBalloons();
+                createConfetti();
+                hiddenBtn.classList.add('show');
+                instruction.style.display = 'none';
+            }, 800);
+            
+            // Vibración si está disponible
+            if (navigator.vibrate) {
+                navigator.vibrate([50, 100, 50]);
+            }
+        }
+        
+        function createBalloons() {
+            const container = document.getElementById('balloons');
+            const colors = ['#ff6b6b', '#4ecdc4', '#ffe66d', '#a8e6cf', '#ff8b94', '#c7ceea', '#ffd93d', '#6bcf7f', '#ff9ff3', '#54a0ff'];
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const balloon = document.createElement('div');
+                    balloon.className = 'balloon';
+                    balloon.style.left = Math.random() * 90 + 5 + '%';
+                    balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    balloon.style.animationDelay = Math.random() * 2 + 's';
+                    balloon.classList.add('rising');
+                    container.appendChild(balloon);
+                    
+                    setTimeout(() => balloon.remove(), 10000);
+                }, i * 150);
+            }
+        }
+        
+        function createConfetti() {
+            const container = document.getElementById('confetti');
+            const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#ff8b94', '#a8e6cf', '#c7ceea', '#ff69b4', '#00ced1', '#ff9ff3', '#feca57'];
+            
+            for (let i = 0; i < 150; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                    confetti.classList.add('falling');
+                    container.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 5000);
+                }, i * 20);
+            }
+        }
+        
+        function showHiddenMessage() {
+            document.getElementById('modal').classList.add('show');
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]);
+            }
+        }
+        
+        function closeModal(event) {
+            if (!event || event.target.id === 'modal' || event.target.className === 'close-modal') {
+                document.getElementById('modal').classList.remove('show');
+            }
+        }
+    </script>
+</body>
+</html>
