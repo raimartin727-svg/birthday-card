@@ -510,11 +510,9 @@
     </style>
 </head>
 <body>
-    <!-- Audio de cumpleaños con violín -->
+    <!-- Audio de violín personalizado -->
     <audio id="birthdaySong" loop>
-        <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Tours/Enthusiast/Tours_-_01_-_Enthusiast.mp3" type="audio/mpeg">
-        <!-- Fallback: URL alternativa de violín -->
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <source src="violin%20melodia.mp3" type="audio/mpeg">
         Tu navegador no soporta audio HTML5.
     </audio>
     
@@ -561,19 +559,19 @@
     
     <!-- Botón de mensaje oculto -->
     <button class="hidden-message-btn" id="hiddenBtn" onclick="showHiddenMessage()">
-        🔒 Presiona aquí
+         Leer más...
     </button>
     
     <!-- Modal del mensaje oculto -->
     <div class="modal-overlay" id="modal" onclick="closeModal(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="close-modal" onclick="closeModal()">✕</button>
-            <h3>💌 Para tus ojos solamente</h3>
+            <h3>💌 Postdata importante</h3>
             <p>No sé si debería decir esto aquí…</p>
             <p>pero me gustaría verte sonreír en persona algún día. Y comprobar si esa sensación que tengo cuando te escribo también existe cuando estamos frente a frente.</p>
             <p>Hay cosas que prefiero decir en persona.</p>
             <p>Esto es solo un adelanto.</p>
-            <p class="final-line">Continuará… si tú quieres. 💫</p>
+            <p class="final-line">Si coincidimos algun día, prometo invitar el café ☕… si tú quieres. 💫</p>
         </div>
     </div>
 
@@ -588,13 +586,8 @@
             // Iniciar música al primer clic (requerido por navegadores)
             if (!musicStarted) {
                 const audio = document.getElementById('birthdaySong');
-                audio.volume = 0.4; // Volumen al 40% para que no sea molesto
-                audio.play().catch(e => {
-                    console.log('Audio autoplay blocked:', e);
-                    // Intentar con el fallback si el primero falla
-                    audio.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
-                    audio.play().catch(err => console.log('Fallback also blocked:', err));
-                });
+                audio.volume = 0.5; // Volumen al 50%
+                audio.play().catch(e => console.log('Audio play failed:', e));
                 musicStarted = true;
             }
             
